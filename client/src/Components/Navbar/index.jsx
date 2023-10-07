@@ -7,8 +7,6 @@ const Navbar = () => {
             <Link to='/'>Post List</Link>
             {' | '}
             <Link to='/posts/new'>New Post</Link>
-            {' | '}
-            <Link to={`/posts/${12}`}>Post Details</Link>
         </nav>
     )
 }
