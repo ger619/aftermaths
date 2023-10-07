@@ -26,6 +26,20 @@ const PostsList = () => {
         }
         loadPosts();
     }, []);
+    const deletePost = async (id) => {
+        try {
+            const response = await fetch(`${API_URL}/${id}`, {
+                method: "DELETE",
+            });
+            if (response.ok) {
+                setPosts(posts.filter((post) => post.id !== id));
+            } else {
+                throw response;
+            }
+        } catch (error) {
+            console.error(error);
+        }
+    }
 
     return (
         <div>
@@ -37,6 +51,10 @@ const PostsList = () => {
                         </Link>
                      </h2>
                     <p>{post.body}</p>
+
+                    <button onClick={() => deletePost(post.id)}>
+                        Delete
+                    </button>
                 </div>
             ))}
             </div>
