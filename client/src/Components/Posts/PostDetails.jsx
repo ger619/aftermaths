@@ -21,6 +21,7 @@ const PostDetails = () => {
                 }
             } catch (error) {
                 console.error(error);
+                setError("Error fetching data. Try again later.");
             }
         };
         fetchPost();
