@@ -1,27 +1,21 @@
 import React, { useState, useEffect } from 'react';
-import { API_URL } from "../../constants.js";
 import { Link } from "react-router-dom";
+import { deletePosts, fetchAllPost, fetchPostOne } from "../../service/postService.js";
 
 const PostsList = () => {
     const [posts, setPosts] = React.useState([]);
     const [isLoading, setIsLoading] = React.useState(true);
     const [error, setError] = React.useState(null);
-
     // Fetch posts from API
     useEffect(() => {
         async function loadPosts() {
             try {
-                const response = await fetch(API_URL);
-                if (response.ok) {
-                    const data = await response.json();
-                    setPosts(data);
-                } else {
-                    throw response;
-                }
-            } catch (e) {
-                setError("Something went wrong. Please try again later.");
-            } finally {
+                const posts = await fetchAllPost();
+                setPosts(posts);
                 setIsLoading(false);
+            } catch (error) {
+                setError(error);
+                setIsLoading(false)
             }
         }
         loadPosts();
@@ -30,19 +24,12 @@ const PostsList = () => {
     if (isLoading) return <div>Loading...</div>;
     const deletePost = async (id) => {
         try {
-            const response = await fetch(`${API_URL}/${id}`, {
-                method: "DELETE",
-            });
-            if (response.ok) {
-                setPosts(posts.filter((post) => post.id !== id));
-            } else {
-                throw response;
-            }
+            await deletePosts(id);
+            setPosts(posts.filter((post) => post.id !== id));
         } catch (error) {
-            console.error(error);
+            console.error("Failed to delete the post", error);
         }
     }
-
     return (
         <div>
             {posts.map((post) => (
@@ -53,7 +40,6 @@ const PostsList = () => {
                         </Link>
                      </h2>
                     <p>{post.body}</p>
-
                     <Link to={`/posts/${post.id}/edit`}>Edit</Link>
                     {' | '}
                     <button onClick={() => deletePost(post.id)}>
