@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
-import { deletePosts, fetchAllPost, fetchPostOne } from "../../service/postService.js";
+import { fetchAllPost, deletePost } from "../../service/postService.js";
 
 const PostsList = () => {
     const [posts, setPosts] = React.useState([]);
-    const [isLoading, setIsLoading] = React.useState(true);
+    const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = React.useState(null);
     // Fetch posts from API
     useEffect(() => {
@@ -22,9 +22,9 @@ const PostsList = () => {
     }, []);
 
     if (isLoading) return <div>Loading...</div>;
-    const deletePost = async (id) => {
+    const deletePostHandler = async (id) => {
         try {
-            await deletePosts(id);
+            await deletePost(id);
             setPosts(posts.filter((post) => post.id !== id));
         } catch (error) {
             console.error("Failed to delete the post", error);
@@ -42,7 +42,7 @@ const PostsList = () => {
                     <p>{post.body}</p>
                     <Link to={`/posts/${post.id}/edit`}>Edit</Link>
                     {' | '}
-                    <button onClick={() => deletePost(post.id)}>
+                    <button onClick={() => deletePostHandler(post.id)}>
                         Delete
                     </button>
                 </div>

@@ -9,6 +9,20 @@ const fetchAllPost = async () => {
     return await response.json();
 }
 
+const createPost = async (post) => {
+    const response = await fetch(`${API_URL}`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(post),
+    });
+    if (!response.ok) {
+        throw new Error(response.statusText);
+    }
+    return await response.json();
+
+}
 
 const fetchPostOne = async (id) => {
     const response = await fetch(`${API_URL}/${id}`);
@@ -17,7 +31,7 @@ const fetchPostOne = async (id) => {
     }
     return await response.json();
 }
-const deletePosts = async (id) => {
+const deletePost = async (id) => {
 
     const response = await fetch(`${API_URL}/${id}`, {
         method: 'DELETE',
@@ -32,4 +46,4 @@ const deletePosts = async (id) => {
         return await response.json();
 }
 
-export { deletePosts, fetchAllPost, fetchPostOne };
+export { createPost, deletePost, fetchAllPost, fetchPostOne };
