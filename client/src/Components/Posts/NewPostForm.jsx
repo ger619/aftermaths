@@ -13,20 +13,13 @@ const NewPostForm = () => {
             title,
             body,
         };
-        const response = await fetch(`${API_URL}`, {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(post),
-        });
-        if (response.ok) {
-            const { id } = await response.json();
-            navigate(`/posts/${id}`);
-        } else {
-            console.error("Failed to create post");
+        try {
+           const response =await createPost(post);
+           navigate(`/posts/${response.id}`)
+        } catch (error) {
+            console.error("Failed to create post" ,error);
         }
-    }
+    };
     return (
         <div>
         <h2>New Post to Add</h2>

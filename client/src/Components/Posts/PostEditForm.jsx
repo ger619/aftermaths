@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams} from "react-router-dom";
-import { API_URL } from "../../constants";
+import { fetchPostOne, updatePost } from "../../service/postService.js";
 
 const PostEditForm = () => {
     const [post, setPost] = useState(null);
@@ -13,20 +13,14 @@ const PostEditForm = () => {
         //Fetch the post from the API by ID this is the same as the show page
         const fetchCurrentPost = async () => {
             try {
-                const response = await fetch(`${API_URL}/${id}`);
-                if (response.ok) {
-                    const data = await response.json();
-                    setPost(data);
-                } else {
-                    throw response;
-                }
-            } catch (err) {
-                console.error(err);
-                setError("Something went wrong. Please try again later.");
+                const data = await fetchPostOne(id);
+                setPost(data);
+            } catch (e) {
+                setError("Not Found");
             } finally {
                 setLoading(false);
             }
-        }
+        };
         fetchCurrentPost();
 
     }, [id]);
@@ -34,28 +28,19 @@ const PostEditForm = () => {
     // This is for the form submission after editing the post
     const handelSubmit = async (e) => {
         e.preventDefault()
-        try {
-            const response = await fetch(`${API_URL}/${id}`, {
-                method: "PUT",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    title: post.title,
-                    body: post.body,
-                }),
-            });
-            if (response.ok) {
-                const data = await response.json();
-                navigate(`/posts/${data.id}`);
 
-            } else {
-                throw response;
-            }
+        const updatedPost = {
+            title: post.title,
+            body: post.body,
+        };
+        try {
+            const response = await updatePost(id, updatedPost);
+            navigate(`/posts/${response.id}`);
         } catch (e) {
             console.error(e);
         }
     };
+
     if (loading) return <div>Loading...</div>;
     return (
         <div>
