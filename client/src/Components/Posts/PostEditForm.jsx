@@ -22,13 +22,11 @@ const PostEditForm = () => {
             }
         };
         fetchCurrentPost();
-
     }, [id]);
 
     // This is for the form submission after editing the post
     const handelSubmit = async (e) => {
         e.preventDefault()
-
         const updatedPost = {
             title: post.title,
             body: post.body,
