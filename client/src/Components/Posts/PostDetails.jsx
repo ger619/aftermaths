@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
-import {API_URL} from "../../constants.js";
+import { fetchPostOne, deletePost  } from "../../service/postService.js";
 
 const PostDetails = () => {
     const [post, setPost] = useState(null);
@@ -12,14 +12,10 @@ const PostDetails = () => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await fetch(`${API_URL}/${id}`);
-                if (response.ok) {
-                    const data = await response.json();
-                    setPost(data);
-                    setLoading(false);
-                } else {
-                    throw response;
-                }
+                const response = await fetchPostOne(id);
+                setPost(response)
+                setLoading(false);
+                console.log(response);
             } catch (error) {
                 console.error(error);
                 setError("Error fetching data. Try again later.");
@@ -28,16 +24,10 @@ const PostDetails = () => {
         fetchPost();
     }, [id]);
 
-    const deletePost = async () => {
+    const deletePostHandler = async () => {
         try {
-            const response = await fetch(`${API_URL}/${id}`, {
-                method: "DELETE",
-            });
-            if (response.ok) {
-                navigate('/');
-            } else {
-                throw response;
-            }
+            await deletePost(id);
+            navigate("/");
         } catch (error) {
             console.error(error);
         }
@@ -52,7 +42,7 @@ const PostDetails = () => {
             {' | '}
             {/* Delete Button */}
             <Link to={`/posts/${id}/edit`}>Edit</Link>
-            <button onClick={deletePost}>
+            <button onClick={deletePostHandler}>
                 Delete
             </button>
         </div>
