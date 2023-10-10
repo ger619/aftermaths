@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-unused-vars
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams} from "react-router-dom";
 import { fetchPostOne, updatePost } from "../../service/postService.js";
@@ -6,6 +7,7 @@ const PostEditForm = () => {
     const [post, setPost] = useState(null);
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
+    // eslint-disable-next-line no-unused-vars
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 

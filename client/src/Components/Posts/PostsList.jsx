@@ -5,6 +5,7 @@ import { fetchAllPost, deletePost } from "../../service/postService.js";
 const PostsList = () => {
     const [posts, setPosts] = React.useState([]);
     const [isLoading, setIsLoading] = useState(true);
+    // eslint-disable-next-line no-unused-vars
     const [error, setError] = React.useState(null);
     // Fetch posts from API
     useEffect(() => {
@@ -15,6 +16,7 @@ const PostsList = () => {
                 setIsLoading(false);
             } catch (error) {
                 setError(error);
+                console.error("There was an error fetching the posts!", error);
                 setIsLoading(false)
             }
         }
