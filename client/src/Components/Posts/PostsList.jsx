@@ -1,11 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { fetchAllPost, deletePost } from "../../service/postService.js";
 
 const PostsList = () => {
-    const [posts, setPosts] = React.useState([]);
+    const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
-    const [error, setError] = React.useState(null);
+    // eslint-disable-next-line no-unused-vars
+    const [error, setError] = useState(null);
     // Fetch posts from API
     useEffect(() => {
         async function loadPosts() {
@@ -15,6 +16,7 @@ const PostsList = () => {
                 setIsLoading(false);
             } catch (error) {
                 setError(error);
+                console.error("There was an error fetching the posts!", error);
                 setIsLoading(false)
             }
         }

@@ -1,9 +1,8 @@
- import React from "react";
 import { Route, Routes } from "react-router-dom";
 import PostsList  from "../Posts/PostsList.jsx";
 import PostDetails from "../Posts/PostDetails.jsx";
- import NewPostForm from "../Posts/NewPostForm.jsx";
- import PostEditForm from "../Posts/PostEditForm.jsx";
+import NewPostForm from "../Posts/NewPostForm.jsx";
+import PostEditForm from "../Posts/PostEditForm.jsx";
 
 const AppRoutes = () => {
     return (

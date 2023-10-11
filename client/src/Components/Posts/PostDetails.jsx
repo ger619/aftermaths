@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+// eslint-disable-next-line no-unused-vars
+import { useState, useEffect } from "react";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import { fetchPostOne, deletePost  } from "../../service/postService.js";
 
 const PostDetails = () => {
     const [post, setPost] = useState(null);
     const [loading, setLoading] = useState(true);
+    // eslint-disable-next-line no-unused-vars
     const [error, setError] = useState(null);
     const { id } = useParams();
     const navigate = useNavigate();

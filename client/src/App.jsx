@@ -1,6 +1,5 @@
 import {BrowserRouter as Router} from 'react-router-dom'
 import './App.css'
-//import PostsList from './Components/Posts/PostsList'
 import Navbar from './Components/Navbar'
 import AppRoutes from './Components/AppRoutes'
 function App() {

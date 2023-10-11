@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+// eslint-disable-next-line no-unused-vars
+import { useEffect, useState } from "react";
 import { useNavigate, useParams} from "react-router-dom";
 import { fetchPostOne, updatePost } from "../../service/postService.js";
 
@@ -6,6 +7,7 @@ const PostEditForm = () => {
     const [post, setPost] = useState(null);
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
+    // eslint-disable-next-line no-unused-vars
     const [error, setError] = useState(null);
     const navigate = useNavigate();
 
@@ -22,13 +24,11 @@ const PostEditForm = () => {
             }
         };
         fetchCurrentPost();
-
     }, [id]);
 
     // This is for the form submission after editing the post
     const handelSubmit = async (e) => {
         e.preventDefault()
-
         const updatedPost = {
             title: post.title,
             body: post.body,

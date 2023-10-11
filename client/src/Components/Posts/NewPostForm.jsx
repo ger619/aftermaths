@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+// eslint-disable-next-line no-unused-vars
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { createPost } from "../../service/postService.js";
 
