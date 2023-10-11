@@ -1,12 +1,12 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
 import { fetchAllPost, deletePost } from "../../service/postService.js";
 
 const PostsList = () => {
-    const [posts, setPosts] = React.useState([]);
+    const [posts, setPosts] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     // eslint-disable-next-line no-unused-vars
-    const [error, setError] = React.useState(null);
+    const [error, setError] = useState(null);
     // Fetch posts from API
     useEffect(() => {
         async function loadPosts() {
