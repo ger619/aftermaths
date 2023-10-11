@@ -28,3 +28,6 @@ dist-ssr
 #Do not push the .env file to github
 .env
 .env.development
+
+#Do not push up the coverage folder to github
+coverage
