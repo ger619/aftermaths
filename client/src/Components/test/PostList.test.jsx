@@ -1,6 +1,6 @@
 import { MemoryRouter } from "react-router-dom";
 import {fireEvent, render, screen, waitFor} from "@testing-library/react";
-import PostsList  from "./PostsList.jsx";
+import PostsList  from "../Posts/PostsList.jsx";
 import * as postService from '../../service/postService.js'
 
 jest.mock("../../constants.js", () => ({

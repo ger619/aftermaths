@@ -2,14 +2,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams} from "react-router-dom";
 import { fetchPostOne, updatePost } from "../../service/postService.js";
+import PostForm from "./PostForm.jsx";
 
 const PostEditForm = () => {
     const [post, setPost] = useState(null);
     const { id } = useParams();
-    const [loading, setLoading] = useState(true);
-    // eslint-disable-next-line no-unused-vars
-    const [error, setError] = useState(null);
     const navigate = useNavigate();
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         //Fetch the post from the API by ID this is the same as the show page
@@ -27,14 +26,9 @@ const PostEditForm = () => {
     }, [id]);
 
     // This is for the form submission after editing the post
-    const handelSubmit = async (e) => {
-        e.preventDefault()
-        const updatedPost = {
-            title: post.title,
-            body: post.body,
-        };
+    const handleUpdateSubmit = async ( formData ) => {
         try {
-            const response = await updatePost(id, updatedPost);
+            const response = await updatePost(id, formData);
             navigate(`/posts/${response.id}`);
         } catch (e) {
             console.error(e);
@@ -43,33 +37,12 @@ const PostEditForm = () => {
 
     if (loading) return <div>Loading...</div>;
     return (
-        <div>
-            <h1>Edit Post</h1>
-            <form onSubmit={handelSubmit}>
-                <div>
-                    <label htmlFor="post-title">Title</label>
-                    <input
-                        type="text"
-                        name="post-title"
-                        id="post-title"
-                        value={post.title}
-                        onChange={(e) => setPost({ ...post, title: e.target.value })}
-                    />
-                </div>
-                <div>
-                    <label htmlFor="post-body">Body</label>
-                    <textarea
-                        name="post-body"
-                        id="post-body"
-                        value={post.body}
-                        onChange={(e) => setPost({ ...post, body: e.target.value })}
-                    />
-                </div>
-                <div>
-                    <button type="submit">Submit</button>
-                </div>
-            </form>
-        </div>
+       <PostForm
+           post={post}
+           headerText="EDIT POST"
+           onSubmit={handleUpdateSubmit}
+           buttonText="Update Post"
+       />
     )
 }
 
