@@ -16,8 +16,8 @@ const PostsList = () => {
                 setIsLoading(false);
             } catch (error) {
                 setError(error);
-                console.error("There was an error fetching the posts!", error);
                 setIsLoading(false)
+                console.error("Failed to fetch post", error);
             }
         }
         loadPosts();
@@ -29,7 +29,7 @@ const PostsList = () => {
             await deletePost(id);
             setPosts(posts.filter((post) => post.id !== id));
         } catch (error) {
-            console.error("Failed to delete the post", error);
+            console.error("Failed to fetch post", error);
         }
     }
     return (
