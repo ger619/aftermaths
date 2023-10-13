@@ -9,13 +9,11 @@ const fetchAllPost = async () => {
     return await response.json();
 }
 
-const createPost = async (post) => {
+const createPost = async (postData) => {
     const response = await fetch(`${API_URL}`, {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(post),
+
+        body: postData,
     });
     if (!response.ok) {
         throw new Error(response.statusText);
