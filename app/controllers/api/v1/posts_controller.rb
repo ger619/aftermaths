@@ -19,7 +19,7 @@ class Api::V1::PostsController < ApplicationController
   # GET /posts/1
   def show
     if @post.image.attached?
-      render json: @post.as_json.merge(image_url: url_for(post.image))
+      render json: @post.as_json.merge(image_url: url_for(@post.image))
     else
       render json: @post.as_json.merge(image_url: nil)
     end
