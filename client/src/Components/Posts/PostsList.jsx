@@ -42,6 +42,7 @@ const PostsList = () => {
                         </Link>
                      </h2>
                     <p>{post.body}</p>
+                    <img src={post.image_url} alt={post.title} className="post-image"/>
                     <Link to={`/posts/${post.id}/edit`}>Edit</Link>
                     {' | '}
                     <button onClick={() => deletePostHandler(post.id)}>
