@@ -27,6 +27,11 @@ const PostEditForm = () => {
 
     // This is for the form submission after editing the post
     const handleUpdateSubmit = async ( formData ) => {
+
+        formData.append("post[title]", rawData.title);
+        formData.append("post[body]", rawData.body);
+        formData.append("post[image]", rawData.image);
+
         try {
             const response = await updatePost(id, formData);
             navigate(`/posts/${response.id}`);
