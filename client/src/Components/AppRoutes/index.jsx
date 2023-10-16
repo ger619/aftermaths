@@ -6,6 +6,7 @@ import PostEditForm from "../Posts/PostEditForm.jsx";
 
 const AppRoutes = () => {
     return (
+
         <Routes>
             <Route path="/" element={<PostsList />} />
             <Route path="/posts/new" element={<NewPostForm/>} />
