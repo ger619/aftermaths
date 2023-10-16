@@ -3,7 +3,6 @@ import { Carousel } from 'react-responsive-carousel';
 import image1 from "../../assets/1.jpeg"
 import image2 from "../../assets/2.jpeg"
 import image3 from "../../assets/3.jpg"
-import Navbar from "../Navbar/index.jsx";
 
 
 const CarouselHeader = () => {
