@@ -39,12 +39,15 @@ const PostDetails = () => {
     return (
         <div>
             <h2>{post.title}</h2>
-            <img src={post.image_url} alt={post.title} className="post-image"/>
+            <div className="flex justify-center">
+                <img src={post.image_url} alt={post.title} className="w-80 rounded-lg border-2 border-[#ccc] shadow-2xl "/>
+            </div>
             <p>{post.body}</p>
             <Link to='/'>Back</Link>
             {' | '}
             {/* Delete Button */}
             <Link to={`/posts/${id}/edit`}>Edit</Link>
+            {' | '}
             <button onClick={deletePostHandler}>
                 Delete
             </button>

@@ -19,6 +19,7 @@ const PostForm = ({ post, headerText, onSubmit, buttonText }) => {
                <div>
                    <label htmlFor="title">Title: </label>
                    <input
+                       className="border border-gray-400"
                        id="title"
                        type="text"
                        value={formData.title}
@@ -31,6 +32,7 @@ const PostForm = ({ post, headerText, onSubmit, buttonText }) => {
                <div>
                    <label htmlFor="body">Body: </label>
                    <textarea
+                       className="border border-gray-400"
                        id="body"
                        type="text"
                        value={formData.body}
@@ -52,11 +54,17 @@ const PostForm = ({ post, headerText, onSubmit, buttonText }) => {
                            image: e.target.files[0],
                        })
                    }
+
                    />
                </div>
 
                <div>
-                   <button type="submit">{buttonText}</button>
+                   <button
+                       type="submit"
+                       className="border border-gray-400"
+                   >
+                       {buttonText}
+                   </button>
                </div>
 
 
