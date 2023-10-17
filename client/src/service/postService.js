@@ -22,13 +22,10 @@ const createPost = async (postData) => {
 
 }
 
-const updatePost = async (id, post) => {
+const updatePost = async (id, postData) => {
 const response = await fetch(`${API_URL}/${id}`, {
         method: 'PUT',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(post),
+        body: postData,
     });
     if (!response.ok) {
         throw new Error(response.statusText);

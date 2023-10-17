@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams} from "react-router-dom";
 import { fetchPostOne, updatePost } from "../../service/postService.js";
 import PostForm from "./PostForm.jsx";
+import {objectToFormData} from "../../utils/formDataHelper.js";
 
 const PostEditForm = () => {
     const [post, setPost] = useState(null);
@@ -26,11 +27,13 @@ const PostEditForm = () => {
     }, [id]);
 
     // This is for the form submission after editing the post
-    const handleUpdateSubmit = async ( formData ) => {
-
-        formData.append("post[title]", rawData.title);
-        formData.append("post[body]", rawData.body);
-        formData.append("post[image]", rawData.image);
+    const handleUpdateSubmit = async ( rawData ) => {
+        const sanitizedFormData = {
+            title: rawData.title,
+            body: rawData.body,
+            image: rawData.image,
+        };
+        const formData = objectToFormData({ post: sanitizedFormData });
 
         try {
             const response = await updatePost(id, formData);
